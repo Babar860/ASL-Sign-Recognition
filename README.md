@@ -1,43 +1,36 @@
 # ASL System
 
-This folder contains the complete SignAssist/ASL demo system prepared for a clean GitHub repository.
-
-## Folder Structure
+This repository packages the full SignAssist demo into one cloneable root with three runnable projects:
 
 ```text
 ASL_System/
-  ASL_backend_Api_System/       .NET backend API
-  ASL_Trained_model_system/     Python ASL model/API backend
-  ASL_Mobile_Application_system Android mobile app frontend
+  ASL_backend_Api_System/        .NET backend API
+  ASL_Trained_model_system/      Python ASL backend and trained models
+  ASL_Mobile_Application_system/ Android mobile app frontend
 ```
 
-The original project folders are still kept in `D:\FYP`; this folder is a copied, renamed package for pushing to a new repo.
+## What is included
 
-## Services
+- User authentication, feedback, translation history, learning, and admin APIs in .NET
+- Sign-to-text, live frame prediction, text-to-sign, and alphabet asset handling in Python
+- Android app UI, navigation, and API integration for user and admin flows
+- Trained model checkpoints required for demo/testing
 
-Run the services in this order:
+## Quick start
 
-1. PostgreSQL database
-2. .NET backend API on port `5140`
-3. Python ASL backend on port `8000`
-4. Android app on phone/emulator
+1. Start PostgreSQL.
+2. Run the .NET backend on port `5140`.
+3. Run the Python backend on port `8000`.
+4. Update the Android API IP address if the PC network changes.
+5. Build and run the Android app on a device or emulator.
 
-## 1. .NET Backend API
+## 1. .NET backend
 
 Folder:
 
 ```text
 ASL_backend_Api_System
 ```
-
-Purpose:
-
-- User signup/login/password reset
-- Feedback API
-- Translation history API
-- Learning API
-- Admin APIs for users, feedback, and Text-to-Sign history
-- Database migrations/table setup
 
 Run:
 
@@ -47,37 +40,33 @@ dotnet restore
 dotnet run --urls http://0.0.0.0:5140
 ```
 
-Verify:
+Swagger:
 
 ```text
 http://localhost:5140/swagger
 ```
 
-Database:
-
-The default PostgreSQL connection is in `appsettings.json`:
+Default database connection in `appsettings.json`:
 
 ```json
 "Host=localhost;Port=5432;Database=SIGN_LANGUAGE_DATABASE;Username=postgres;Password=12345"
 ```
 
-Update it on another system if the PostgreSQL username/password/database is different.
+This backend provides:
 
-## 2. Python ASL Backend
+- signup/login/password reset
+- feedback storage
+- translation history storage
+- learning APIs
+- admin APIs for users, feedback, and Text-to-Sign history
+
+## 2. Python backend
 
 Folder:
 
 ```text
 ASL_Trained_model_system
 ```
-
-Purpose:
-
-- Sign-to-text API
-- Live camera frame prediction API
-- Text-to-sign video/image asset API
-- Learning alphabet sign API
-- Model loading and inference
 
 Install:
 
@@ -94,46 +83,34 @@ Run:
 .\.venv\Scripts\python.exe -m uvicorn api_server:app --host 0.0.0.0 --port 8000
 ```
 
-Verify:
+Health check:
 
 ```powershell
 Invoke-RestMethod http://127.0.0.1:8000/health
 ```
 
-Current model file included:
+Included model files:
 
 ```text
 models/word_signnet_best.pth
-```
-
-Current missing optional fallback file:
-
-```text
 models/signnet_best.pth
 ```
 
-That missing file is only needed for static-letter fallback. The current live word prediction uses `word_signnet_best.pth`.
+This backend provides:
 
-After you provide the Sign-MNIST CSV files, place them here before training static letters:
+- live sign-to-text prediction
+- sign-to-text on uploaded video
+- text-to-sign playback data
+- learning alphabet assets
 
-```text
-ASL_Trained_model_system/archive/sign_mnist_train/sign_mnist_train.csv
-ASL_Trained_model_system/archive/sign_mnist_test/sign_mnist_test.csv
-```
-
-Then train:
+Training scripts are included if you need to retrain later:
 
 ```powershell
 .\.venv\Scripts\python.exe train.py
-```
-
-Word model training:
-
-```powershell
 .\.venv\Scripts\python.exe train_words.py
 ```
 
-## 3. Android Mobile Application
+## 3. Android app
 
 Folder:
 
@@ -141,50 +118,9 @@ Folder:
 ASL_Mobile_Application_system
 ```
 
-Purpose:
-
-- User login/signup
-- Admin login from the same login page
-- Text-to-sign playback
-- Live sign-to-text camera prediction
-- Learning alphabet
-- Feedback
-- Translation history
-- Admin dashboard
-
-Admin login:
-
-```text
-Email: admin@gmail.com
-Password: admin123
-```
-
-Backend URLs are configured in:
-
-```text
-ASL_Mobile_Application_system/app/src/main/java/com/example/signassistap/network/ApiClient.kt
-```
-
-Current values:
-
-```kotlin
-private const val BASE_URL = "http://192.168.0.33:5140/"
-private const val ASL_BASE_URL = "http://192.168.0.33:8000/"
-```
-
-When running on another computer, update `192.168.0.33` to that computer's LAN IP address.
-
-For Android Emulator, use:
-
-```text
-http://10.0.2.2:5140/
-http://10.0.2.2:8000/
-```
-
 Build APK:
 
 ```powershell
-cd ASL_Mobile_Application_system
 $env:JAVA_HOME='C:\Program Files\Android\Android Studio\jbr'
 $env:Path="$env:JAVA_HOME\bin;$env:Path"
 .\gradlew.bat :app:assembleDebug
@@ -196,60 +132,58 @@ APK output:
 app/build/outputs/apk/debug/app-debug.apk
 ```
 
-## Main Completed Changes
+Backend URLs are configured in:
 
-Backend API:
+```text
+app/src/main/java/com/example/signassistap/network/ApiClient.kt
+```
 
-- Added translation history storage per user.
-- Added feedback storage per user as an array.
-- Added admin APIs for users, feedback, and Text-to-Sign history.
-- Added learning APIs for alphabet signs.
-- Added last-24-hours history handling.
-- Added database table creation for history and feedback.
+Current default values:
 
-Python ASL backend:
+```kotlin
+private const val BASE_URL = "http://192.168.0.33:5140/"
+private const val ASL_BASE_URL = "http://192.168.0.33:8000/"
+```
 
-- Added sign-to-text and live-frame APIs.
-- Added text-to-sign sequence handling for sentence input.
-- Added word-video plus letter-image fallback behavior.
-- Added learning alphabet asset APIs.
-- Added model preload at API startup.
-- Improved live prediction latency:
-  - Android sends frames every `220ms`.
-  - Backend requires `10` live frames instead of `24`.
-  - Backend resizes live frames for faster MediaPipe processing.
-  - Android sends smaller/lower-quality JPEG frames.
+For Android Emulator, use:
 
-Android app:
+```text
+http://10.0.2.2:5140/
+http://10.0.2.2:8000/
+```
 
-- Integrated .NET backend APIs.
-- Integrated Python ASL backend APIs.
-- Added live sign-to-text camera flow.
-- Added sentence paragraph output for detected text.
-- Added Text-to-Sign sequence playback.
-- Added pause/resume, clear, and speed dropdown for Text-to-Sign.
-- Removed admin and upload tabs from user dashboard.
-- Added admin dashboard through same login screen.
-- Added admin feedback and Text-to-Sign data screens with show more/show less.
-- Added live dashboard counts for users, feedback, and translations.
-- Added history and feedback persistence.
+Main app features:
 
-## Demo Checklist
+- user login and signup
+- admin login from the same screen
+- live sign-to-text camera flow
+- text-to-sign playback with speed control
+- learning alphabet section
+- feedback and history
+- admin dashboard
 
-Before demo on another system:
+Admin login:
 
-1. Clone repo.
-2. Install PostgreSQL and create/update database connection.
+```text
+Email: admin@gmail.com
+Password: admin123
+```
+
+## Demo checklist
+
+Before testing on another machine:
+
+1. Clone this repo.
+2. Install PostgreSQL and update the backend connection string if needed.
 3. Install Python dependencies.
-4. Confirm `models/word_signnet_best.pth` exists.
-5. Start .NET API on `5140`.
-6. Start Python ASL API on `8000`.
-7. Update Android `ApiClient.kt` IP address.
-8. Build/run Android app.
-9. Phone and PC must be on the same Wi-Fi network.
+4. Start the .NET API on `5140`.
+5. Start the Python API on `8000`.
+6. Update `ApiClient.kt` with the new PC LAN IP for a real phone.
+7. Build/run the Android app.
+8. Keep the phone and PC on the same network for live testing.
 
 ## Notes
 
-- `.gitignore` files are included inside each project folder.
-- Generated files such as builds, caches, virtual environments, logs, and local IDE state were excluded from this copied package.
-- Runtime source, required config, model checkpoint, and assets are intended to remain trackable for the new repository.
+- No retraining is needed for the committed checkpoint files.
+- `.gitignore` files are included inside the projects to keep builds and local caches out of git.
+- The repo is prepared for a clean clone-and-run demo on another system.
