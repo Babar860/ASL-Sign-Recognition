@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="final_module_launcher_label">SignAssist Text &amp; Admin</string>
+    <string name="final_module_shortcut_label">Text to Sign &amp; Admin</string>
+    <string name="final_module_shortcut_long_label">Open Text to Sign, Feedback, History, Admin</string>
+</resources>

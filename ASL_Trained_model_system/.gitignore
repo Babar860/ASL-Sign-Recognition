@@ -1,0 +1,62 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Virtual environments and local dependency folders
+.venv/
+venv/
+env/
+ENV/
+.env
+.env.*
+
+# IDE and OS noise
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs and runtime output
+logs/*
+!logs/.gitkeep
+*.log
+server.err.log
+server.log
+
+# Model checkpoints required for demo/runtime should be tracked.
+# Do not ignore models/, *.pth, *.pt, *.onnx, or *.ckpt here.
+
+# Dataset archives and large local data
+archive/
+archive/*.csv
+archive/sign_mnist_train/
+archive/sign_mnist_test/
+*.zip
+*.tar
+*.tar.gz
+*.7z
+!assets/sign_to_text/wlasl_top500_words.zip
+
+# Assets required for Text-to-Sign, learning signs, and demo runtime should be tracked.
+# Ignore only generated keypoint caches and temporary derived manifests.
+assets/sign_to_text/keypoints/
+assets/sign_to_text/keypoints_*/
+assets/sign_to_text/wlasl_cached*_manifest.csv
+assets/sign_to_text/wlasl_cached*_words.txt
+assets/sign_to_text/word_manifest*.csv
+
+# Build and packaging artifacts
+build/
+dist/
+*.egg-info/
+pip-wheel-metadata/

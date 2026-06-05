@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application>
+        <meta-data
+            android:name="android.app.shortcuts"
+            android:resource="@xml/final_module_shortcuts" />
+
+        <activity
+            android:name="com.example.signassistap.finalmodule.FinalSignAssistActivity"
+            android:exported="true"
+            android:theme="@style/Theme.SignAssistApp">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="signassist"
+                    android:host="final" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

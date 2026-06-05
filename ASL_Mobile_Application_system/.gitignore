@@ -1,0 +1,53 @@
+# Gradle and Android build output
+.gradle/
+build/
+app/build/
+final-sign-features/build/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Local machine configuration
+local.properties
+
+# Android Studio / IntelliJ user state
+.idea/caches/
+.idea/libraries/
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+*.iml
+
+# Kotlin/Java generated state and crash logs
+.kotlin/
+*.hprof
+hs_err_pid*.log
+replay_pid*.log
+
+# APK/AAB outputs generated locally
+*.apk
+*.aab
+*.ap_
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+*.swp
+*.swo
+
+# Keep required project files tracked:
+# - gradlew
+# - gradlew.bat
+# - gradle/
+# - settings.gradle.kts
+# - build.gradle.kts
+# - app/
+# - final-sign-features/

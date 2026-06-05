@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="open_final_module"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_dialog_info"
+        android:shortcutShortLabel="@string/final_module_shortcut_label"
+        android:shortcutLongLabel="@string/final_module_shortcut_long_label">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.example.signassistap"
+            android:targetClass="com.example.signassistap.finalmodule.FinalSignAssistActivity" />
+    </shortcut>
+</shortcuts>

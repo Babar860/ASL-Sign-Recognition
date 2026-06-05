@@ -1,0 +1,50 @@
+# Nested repo metadata should not be committed in this combined repo
+**/.git/
+
+# Build/cache output
+**/bin/
+**/obj/
+**/build/
+**/.gradle/
+**/.kotlin/
+**/.pytest_cache/
+**/__pycache__/
+
+# Virtual environments and local dependency folders
+**/.venv/
+**/venv/
+**/env/
+
+# IDE/user state
+**/.vs/
+**/.idea/
+**/.vscode/
+*.user
+*.suo
+*.iml
+
+# Logs/crash dumps/generated packages
+*.log
+hs_err_pid*.log
+replay_pid*.log
+*.apk
+*.aab
+*.ap_
+
+# Local machine/env files
+local.properties
+.env
+.env.*
+
+# OS noise
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Runtime upload/output folders
+**/Uploads/
+**/logs/
+
+# Generated ML caches only. Keep models and demo assets trackable.
+**/assets/sign_to_text/keypoints/
+**/assets/sign_to_text/keypoints_*/
