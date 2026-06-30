@@ -30,12 +30,44 @@ The project is relevant to multimodal ML, human-computer interaction, accessibil
 
 The system has three main layers: a .NET API for users, feedback, history, and admin workflows; a Python backend for trained ASL model inference and text-to-sign assets; and an Android application for user interaction. PostgreSQL stores application data while committed model checkpoints support reproducible demo behavior.
 
+## Architecture Diagram
+
+```mermaid
+flowchart LR
+    User[Mobile User] --> Android[Android App]
+    Android --> DotNet[.NET Backend API]
+    Android --> Python[Python ASL Inference API]
+    DotNet --> DB[(PostgreSQL)]
+    Python --> Models[Trained SignNet Models]
+    Python --> Assets[Text to Sign / Alphabet Assets]
+    Android --> Camera[Live Camera / Uploaded Video]
+    Camera --> Python
+    Python --> Prediction[Sign to Text Prediction]
+    Assets --> Playback[Text to Sign Playback]
+    DotNet --> History[Translation History]
+    DotNet --> Feedback[Feedback and Admin Workflows]
+    Prediction --> Android
+    Playback --> Android
+```
+
 ## Experimental Setup
 
 - Python backend serves trained model checkpoints for live and uploaded-video inference.
 - Android client exercises sign-to-text, text-to-sign, learning, feedback, and history flows.
 - .NET backend provides authenticated API workflows and persistent PostgreSQL-backed data.
 - Local testing uses separate backend ports for API services and mobile network configuration.
+
+## Evaluation Results
+
+| Evaluation area | Result |
+| --- | --- |
+| Model artifact readiness | Repository includes trained checkpoints `word_signnet_best.pth` and `signnet_best.pth` for demo/testing. |
+| Inference workflow | Python backend exposes live frame prediction, uploaded-video sign-to-text, text-to-sign playback data, and learning assets. |
+| Full-stack integration | Android app connects to both .NET user/admin APIs and Python ASL inference APIs. |
+| Persistence workflow | .NET backend supports authentication, feedback, translation history, learning APIs, and admin APIs with PostgreSQL. |
+| Demo reproducibility | README documents backend ports, health check, Android API configuration, and APK build flow for repeatable local testing. |
+
+These results describe implemented prototype capabilities and demo readiness. Formal accuracy benchmarking across signer diversity, lighting, and camera conditions remains future work.
 
 ## Future Research
 
