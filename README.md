@@ -18,6 +18,14 @@ How can a multimodal sign language recognition system combine machine learning i
 - Preserve feedback, history, and admin flows for real user testing.
 - Package the full system so it can be cloned, run, and extended for future experiments.
 
+## Project Contribution
+
+This project contributes a full-stack accessibility prototype rather than a standalone ML notebook. It shows how trained sign recognition models can be wrapped with APIs, mobile interaction, user history, feedback, admin workflows, and learning features to support real usability testing.
+
+## Research Relevance
+
+The project is relevant to multimodal ML, human-computer interaction, accessibility technology, and applied AI evaluation. It can support future experiments on model accuracy, latency, user feedback loops, mobile usability, confidence reporting, and vocabulary expansion for sign language systems.
+
 ## System Architecture
 
 The system has three main layers: a .NET API for users, feedback, history, and admin workflows; a Python backend for trained ASL model inference and text-to-sign assets; and an Android application for user interaction. PostgreSQL stores application data while committed model checkpoints support reproducible demo behavior.
