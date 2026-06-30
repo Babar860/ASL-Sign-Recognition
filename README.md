@@ -2,6 +2,52 @@
 
 This repository packages the full SignAssist demo into one cloneable root with three runnable projects:
 
+## Research Motivation
+
+Accessible communication tools can reduce barriers for Deaf and hard-of-hearing users, but practical sign language systems need more than a model checkpoint. This project explores a full-stack multimodal ML workflow that connects sign recognition, text-to-sign playback, backend APIs, persistent history, and mobile interaction.
+
+## Research Problem
+
+How can a multimodal sign language recognition system combine machine learning inference, backend services, and a mobile user experience to support sign-to-text and text-to-sign workflows in a usable accessibility prototype?
+
+## Objectives
+
+- Provide sign-to-text prediction from live frames and uploaded video.
+- Support text-to-sign playback and learning assets for alphabet/sign practice.
+- Connect Python ML inference with .NET APIs, PostgreSQL storage, and Android UI.
+- Preserve feedback, history, and admin flows for real user testing.
+- Package the full system so it can be cloned, run, and extended for future experiments.
+
+## System Architecture
+
+The system has three main layers: a .NET API for users, feedback, history, and admin workflows; a Python backend for trained ASL model inference and text-to-sign assets; and an Android application for user interaction. PostgreSQL stores application data while committed model checkpoints support reproducible demo behavior.
+
+## Experimental Setup
+
+- Python backend serves trained model checkpoints for live and uploaded-video inference.
+- Android client exercises sign-to-text, text-to-sign, learning, feedback, and history flows.
+- .NET backend provides authenticated API workflows and persistent PostgreSQL-backed data.
+- Local testing uses separate backend ports for API services and mobile network configuration.
+
+## Future Research
+
+- Evaluate recognition accuracy across lighting, camera angles, and signer variation.
+- Expand the dataset for larger vocabulary and sentence-level sign recognition.
+- Compare model architectures for real-time inference on mobile-friendly hardware.
+- Add confidence calibration and uncertainty display for safer user interaction.
+- Study usability with accessibility-focused user testing.
+
+## Citation
+
+```bibtex
+@software{saeed2026aslsignrecognition,
+  author = {Saeed, Babar},
+  title = {ASL Sign Recognition System},
+  year = {2026},
+  url = {https://github.com/Babar860/ASL-Sign-Recognition}
+}
+```
+
 ```text
 ASL_System/
   ASL_backend_Api_System/        .NET backend API
